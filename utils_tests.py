@@ -60,4 +60,28 @@ class TestScan(unittest.TestCase):
         self.assertTrue(result[10002])
         self.assertFalse(result[10003])
         self.assertFalse(result[10004])
-        self.assertFalse(result[10005])
+        self.assertFalse(result[10005])class TestCheckSocket(unittest.TestCase):
+    """
+    Tests for the check_socket() function
+    """
+    def test_socket_open(self):
+        """
+        Tests if an open socket is properly detected
+        """
+        pipe = multiprocessing.Pipe()
+
+        utils.check_socket("127.0.0.1", 50000, pipe[1])
+        result = pipe[0].recv()
+
+        self.assertEqual("50000:open", result)
+
+    def test_socket_closed(self):
+        """
+        Tests if an closed socket is properly detected
+        """
+        pipe = multiprocessing.Pipe()
+
+        utils.check_socket("127.0.0.1", 50003, pipe[1])
+        result = pipe[0].recv()
+
+        self.assertEqual("50003:closed", result)
