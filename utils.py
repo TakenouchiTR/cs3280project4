@@ -53,12 +53,11 @@ def check_socket(ip_address, port, pipe):
           pipe - The end of the pipe to return the result
     Return: None
     """
-    try:
-        connection = socket.create_connection((ip_address, port))
+    connection = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    if connection.connect_ex((ip_address, port)) == 1:
         pipe.send(f"{port}:open")
-    except:
+    else:
         pipe.send(f"{port}:closed")
-    
 
 if __name__ == '__main__':
     print(scan("127.0.0.1", 10000, 10000))
