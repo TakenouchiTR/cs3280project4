@@ -4,6 +4,7 @@ Tests for the utils.py lirary
 """
 import unittest
 import utils
+import multiprocessing
 
 __author__ = "Shawn Carter"
 __version__ = "Fall 2021"
@@ -17,50 +18,52 @@ class TestScan(unittest.TestCase):
         """
         Tests if a single, open port is correctly detected
         """
-        result = utils.scan("127.0.0.1", 10000)
+        result = utils.scan("127.0.0.1", 50000)
 
-        self.assertTrue(result[10000])
+        self.assertTrue(result[50000])
         
     def test_single_closed_port(self):
         """
         Tests if a single, closed port is correctly detected
         """
-        result = utils.scan("127.0.0.1", 10003)
+        result = utils.scan("127.0.0.1", 50003)
 
-        self.assertFalse(result[10003])
+        self.assertFalse(result[50003])
 
     def test_many_open_ports(self):
         """
         Tests if many open ports are correctly detected
         """
-        result = utils.scan("127.0.0.1", 10000, 10002)
+        result = utils.scan("127.0.0.1", 50000, 50002)
 
-        self.assertTrue(result[10000])
-        self.assertTrue(result[10001])
-        self.assertTrue(result[10002])
+        self.assertTrue(result[50000])
+        self.assertTrue(result[50001])
+        self.assertTrue(result[50002])
     
     def test_many_closed_ports(self):
         """
         Tests is many closed ports are correctly detected
         """
-        result = utils.scan("127.0.0.1", 10003, 10005)
+        result = utils.scan("127.0.0.1", 50003, 50005)
 
-        self.assertFalse(result[10003])
-        self.assertFalse(result[10004])
-        self.assertFalse(result[10005])
+        self.assertFalse(result[50003])
+        self.assertFalse(result[50004])
+        self.assertFalse(result[50005])
 
     def test_many_open_and_closed_ports(self):
         """
         Tests if both open and closed ports are correctly detected
         """
-        result = utils.scan("127.0.0.1", 10000, 10005)
+        result = utils.scan("127.0.0.1", 50000, 50005)
 
-        self.assertTrue(result[10000])
-        self.assertTrue(result[10001])
-        self.assertTrue(result[10002])
-        self.assertFalse(result[10003])
-        self.assertFalse(result[10004])
-        self.assertFalse(result[10005])class TestCheckSocket(unittest.TestCase):
+        self.assertTrue(result[50000])
+        self.assertTrue(result[50001])
+        self.assertTrue(result[50002])
+        self.assertFalse(result[50003])
+        self.assertFalse(result[50004])
+        self.assertFalse(result[50005])
+
+class TestCheckSocket(unittest.TestCase):
     """
     Tests for the check_socket() function
     """
