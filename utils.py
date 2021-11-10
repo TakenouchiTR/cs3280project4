@@ -41,6 +41,7 @@ def scan(ip_address, start_port, end_port = -1):
     for pipe in pipes:
         message = pipe.recv()
         port, status = message.split(":")
+        port = int(port)
         result[port] = status == "open"
     
     return result
