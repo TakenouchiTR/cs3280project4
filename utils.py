@@ -43,6 +43,7 @@ def scan(ip_address, start_port, end_port = -1):
         port, status = message.split(":")
         port = int(port)
         result[port] = status == "open"
+        pipe.close()
     
     return result
 
