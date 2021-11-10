@@ -53,8 +53,8 @@ def check_socket(ip_address, port, pipe):
           pipe - The end of the pipe to return the result
     Return: None
     """
-    connection = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    if connection.connect_ex((ip_address, port)) == 1:
+    connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    if connection.connect_ex((ip_address, port)) == 0:
         pipe.send(f"{port}:open")
     else:
         pipe.send(f"{port}:closed")
