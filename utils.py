@@ -60,6 +60,3 @@ def check_socket(ip_address, port, pipe):
         pipe.send(f"{port}:open")
     else:
         pipe.send(f"{port}:closed")
-
-if __name__ == '__main__':
-    print(scan("127.0.0.1", 10000, 10000))
