@@ -10,7 +10,7 @@ __author__ = "Shawn Carter"
 __version__ = "Fall 2021"
 __pylint__ = "v1.8.3"
 
-def scan(ip_address, start_port, end_port = -1):
+def scan(ip_address: str, start_port: int, end_port: int = -1):
     """
     Scans a range of ports for the specified IP address, creating a dictionary containing
     key-value pairs for the scanned port and whether or not it's open. If end_port is not
