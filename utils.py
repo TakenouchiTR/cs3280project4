@@ -24,7 +24,7 @@ def scan(ip_address, start_port, end_port = -1):
     processes = []
     pipes = []
 
-    if (end_port == -1):
+    if end_port == -1:
         end_port = start_port
 
     for port in range(start_port, end_port + 1):
@@ -34,17 +34,17 @@ def scan(ip_address, start_port, end_port = -1):
         processes.append(process)
         pipes.append(pipe[0])
         process.start()
-    
+
     for process in processes:
         process.join()
-    
+
     for pipe in pipes:
         message = pipe.recv()
         port, status = message.split(":")
         port = int(port)
         result[port] = status == "open"
         pipe.close()
-    
+
     return result
 
 def check_socket(ip_address, port, pipe):

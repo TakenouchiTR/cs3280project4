@@ -3,8 +3,8 @@
 Tests for the utils.py lirary
 """
 import unittest
-import utils
 import multiprocessing
+import utils
 
 __author__ = "Shawn Carter"
 __version__ = "Fall 2021"
@@ -21,7 +21,7 @@ class TestScan(unittest.TestCase):
         result = utils.scan("127.0.0.1", 50000)
 
         self.assertTrue(result[50000])
-        
+
     def test_single_closed_port(self):
         """
         Tests if a single, closed port is correctly detected
@@ -39,7 +39,7 @@ class TestScan(unittest.TestCase):
         self.assertTrue(result[50000])
         self.assertTrue(result[50001])
         self.assertTrue(result[50002])
-    
+
     def test_many_closed_ports(self):
         """
         Tests is many closed ports are correctly detected
