@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Tests for the utils.py lirary
+Tests for the utils.py library.
+Ports 50000-50002 must be opened for tests to pass.
 """
 import unittest
 import multiprocessing
