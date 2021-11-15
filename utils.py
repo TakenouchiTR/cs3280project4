@@ -37,9 +37,8 @@ def scan(ip_address: str, start_port: int, end_port: int = -1):
 
     for pipe in pipes:
         message = pipe.recv()
-        port, status = message.split(":")
-        port = int(port)
-        result[port] = status == "open"
+        port, status = message
+        result[port] = status
         pipe.close()
 
     return result
@@ -53,7 +52,4 @@ def check_socket(ip_address, port, pipe):
     Return: None
     """
     connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    if connection.connect_ex((ip_address, port)) == 0:
-        pipe.send(f"{port}:open")
-    else:
-        pipe.send(f"{port}:closed")
+    pipe.send((port, connection.connect_ex((ip_address, port)) == 0))
