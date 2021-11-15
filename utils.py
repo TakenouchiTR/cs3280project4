@@ -35,9 +35,6 @@ def scan(ip_address: str, start_port: int, end_port: int = -1):
         pipes.append(pipe[0])
         process.start()
 
-    for process in processes:
-        process.join()
-
     for pipe in pipes:
         message = pipe.recv()
         port, status = message.split(":")
